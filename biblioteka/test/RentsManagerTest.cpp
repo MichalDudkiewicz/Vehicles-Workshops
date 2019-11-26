@@ -8,6 +8,7 @@
 #include "model/clientSilver.h"
 #include "model/rent.h"
 #include <string>
+#include <iostream>
 
 using boost::test_tools::output_test_stream;
 

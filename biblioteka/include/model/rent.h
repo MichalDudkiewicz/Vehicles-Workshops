@@ -21,10 +21,9 @@ private:
     uuid ID;
     local_date_time *rentDateTime;
     local_date_time *endDateTime;
-    float totalPrice;
+    int totalPrice;
     VehiclePtr vehicle;
     ClientPtr client;
-    int rentalLength;
 public:
     Rent(const ClientPtr&, const VehiclePtr&, int=0);
     Rent(const Rent&);
@@ -33,12 +32,10 @@ public:
     string rentInfo() const;
     void endRent();
     int getPeriod() const;
-    const float& getPrice() const;
+    const int& getTotalPrice() const;
     const ClientPtr& getClient() const;
     const local_date_time& getRentDate() const;
     const local_date_time& getEndDate() const;
-    const int& getRentalLength() const;
-    int getTotalPrice() const;
     const uuid& getID() const;
     const string& getRegistrationNumber() const;
 };

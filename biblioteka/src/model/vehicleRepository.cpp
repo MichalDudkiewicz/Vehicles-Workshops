@@ -5,7 +5,7 @@
 #include "model/vehicleRepositoryException.h"
 
 
-void VehicleRepository::addVehicle(const VehiclePtr &v)
+void VehicleRepository::create(const VehiclePtr &v)
 {
     if (v == nullptr) throw VehicleRepositoryException(VehicleRepositoryException::exceptionVehicleNullPtr);
     for(const auto &vehicle : vehicleRepository)
@@ -18,7 +18,7 @@ void VehicleRepository::addVehicle(const VehiclePtr &v)
     vehicleRepository.push_back(v);
 }
 
-void VehicleRepository::removeVehicle(const VehiclePtr &v)
+void VehicleRepository::remove(const VehiclePtr &v)
 {
     if (v == nullptr) throw VehicleRepositoryException(VehicleRepositoryException::exceptionVehicleNullPtr);
     bool found = (find(vehicleRepository.begin(), vehicleRepository.end(), v) != vehicleRepository.end());
@@ -26,7 +26,7 @@ void VehicleRepository::removeVehicle(const VehiclePtr &v)
     vehicleRepository.remove(v);
 }
 
-string VehicleRepository::getVehicle(const unsigned int &index) const
+string VehicleRepository::search(const unsigned int &index) const
 {
     if (index > vehicleRepository.size()) throw VehicleRepositoryException(VehicleRepositoryException::exceptionVehicleNotFound);
     unsigned int i = 1;
@@ -42,7 +42,7 @@ string VehicleRepository::getVehicle(const unsigned int &index) const
     return chain;
 }
 
-string VehicleRepository::vehicleRaport() const
+string VehicleRepository::getAll() const
 {
     ostringstream chain;
     unsigned int i = 1;

@@ -42,8 +42,8 @@ BOOST_AUTO_TEST_CASE(VehicleSameRegExceptionCase)
     VehiclePtr pojazd = make_shared<Vehicle>(1010.2, "A11112");
     VehiclePtr pojazd2 = make_shared<Vehicle>(10210.2, "A11112");
     VehicleRepository v;
-    v.addVehicle(pojazd);
-    BOOST_REQUIRE_THROW(v.addVehicle(pojazd2), logic_error);
+    v.create(pojazd);
+    BOOST_REQUIRE_THROW(v.create(pojazd2), logic_error);
 }
 
 BOOST_AUTO_TEST_CASE(AddressExceptionCase)

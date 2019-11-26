@@ -39,8 +39,8 @@ void RentsManager::rentVehicle(const RentPtr &r)
 
 void RentsManager::returnVehicle(const RentPtr &r)
 {
-    r -> getClient() -> removeArchiveRent(r);
     r -> endRent();
+    r -> getClient() -> removeArchiveRent(r);
     currentRents -> removeRent(r);
     archiveRents -> createRent(r);
     changeClientType(r -> getClient());

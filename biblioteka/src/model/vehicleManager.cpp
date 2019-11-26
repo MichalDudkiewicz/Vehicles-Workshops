@@ -22,17 +22,17 @@ void VehicleManager::addVehicle(const VehiclePtr &vehicle)
     {
         if(vehicle->getRegistrationNumber() == v->getRegistrationNumber())
         {
-            archiveVehicles -> removeVehicle(vehicle);
+            archiveVehicles->remove(vehicle);
             break;
         }
     }
-    currentVehicles -> addVehicle(vehicle);
+    currentVehicles->create(vehicle);
 }
 
 void VehicleManager::removeVehicle(const VehiclePtr &vehicle)
 {
-    currentVehicles -> removeVehicle(vehicle);
-    archiveVehicles -> addVehicle(vehicle);
+    currentVehicles->remove(vehicle);
+    archiveVehicles->create(vehicle);
 }
 
 int VehicleManager::getNumberOfCurrentVehicles() const

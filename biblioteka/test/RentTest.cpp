@@ -21,7 +21,7 @@ BOOST_AUTO_TEST_CASE(RentEndDateTimeCase)
     VehiclePtr pojazd = make_shared<Vehicle>(1010.2, "A11112");
     Rent wypozyczenie(client, pojazd, 10);
     wypozyczenie.endRent();
-    BOOST_REQUIRE(wypozyczenie.getRentalLength() == 11);
+    BOOST_REQUIRE(wypozyczenie.getPeriod() + 1 == 11);
 }
 
 BOOST_AUTO_TEST_CASE(RentPeriodTimeCase)
@@ -39,7 +39,7 @@ BOOST_AUTO_TEST_CASE(RentValueCase)
     VehiclePtr pojazd = make_shared<Vehicle>(1010.2, "A11112");
     Rent wypozyczenie(client, pojazd);
     wypozyczenie.endRent();
-    BOOST_REQUIRE_EQUAL(wypozyczenie.getPrice(), wypozyczenie.getRentalLength() * pojazd -> getPrice());
+    BOOST_REQUIRE_EQUAL(wypozyczenie.getTotalPrice(), (wypozyczenie.getPeriod() + 1) * pojazd -> getPrice());
 }
 
 BOOST_AUTO_TEST_CASE(RentClientCase)

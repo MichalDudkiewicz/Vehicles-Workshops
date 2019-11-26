@@ -15,10 +15,10 @@ class VehicleRepository
 private:
     list<VehiclePtr> vehicleRepository{};
 public:
-    void addVehicle(const VehiclePtr&);
-    void removeVehicle(const VehiclePtr&);
-    string getVehicle(const unsigned int& index) const;
-    string vehicleRaport() const;
+    void create(const VehiclePtr&);
+    void remove(const VehiclePtr&);
+    string search(const unsigned int& index) const;
+    string getAll() const;
     const list<VehiclePtr>& getVehicleRepository() const;
 };
 
