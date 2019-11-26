@@ -22,7 +22,6 @@ private:
     AddressPtr address;
     AddressPtr registeredAddress;
     ClientTypePtr clientType;
-    friend class ClientRepository;
     vector<RentPtr> archivedRents{};
     list<RentPtr> currentRents{};
     int balance;
@@ -49,6 +48,7 @@ public:
     void setBalance(const RentPtr&);
     int getNumberOfArchRents() const;
     const vector<RentPtr>& getAllClientRents() const;
+    const ClientTypePtr& getClientType() const;
 };
 
 #endif

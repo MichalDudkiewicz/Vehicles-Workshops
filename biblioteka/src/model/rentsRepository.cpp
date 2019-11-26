@@ -36,9 +36,10 @@ string RentsRepository::rentReport() const
     return chain.str();
 }
 
-int RentsRepository::getNumberOfRents() const
+const list<RentPtr>& RentsRepository::getRentRepository() const
 {
-    return rentRepositoryList.size();
+    return rentRepositoryList;
 }
+
 
 

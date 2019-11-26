@@ -25,7 +25,6 @@ private:
     VehiclePtr vehicle;
     ClientPtr client;
     int rentalLength;
-    friend class RentsManager;
 public:
     Rent(const ClientPtr&, const VehiclePtr&, int=0);
     Rent(const Rent&);
@@ -35,13 +34,13 @@ public:
     void endRent();
     int getPeriod() const;
     const float& getPrice() const;
-    string getClient() const;
-    string getVehicleRented() const;
+    const ClientPtr& getClient() const;
     const local_date_time& getRentDate() const;
     const local_date_time& getEndDate() const;
     const int& getRentalLength() const;
     int getTotalPrice() const;
     const uuid& getID() const;
+    const string& getRegistrationNumber() const;
 };
 
 #endif

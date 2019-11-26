@@ -161,3 +161,8 @@ const vector<RentPtr>& Client::getAllClientRents() const
 {
     return archivedRents;
 }
+
+const ClientTypePtr& Client::getClientType() const
+{
+    return clientType;
+}

@@ -9,19 +9,18 @@
 
 ClientManager::ClientManager()
         : currentClients(new ClientRepository), archiveClients(new ClientRepository)
-{
-}
+{}
 
 void ClientManager::addClient(const ClientPtr &client)
 {
-    for(const auto& c : currentClients->allClients)
+    for(const auto& c : currentClients->getAllClients())
     {
         if(client->getPersonalID() == c->getPersonalID())
         {
             throw ClientRepositoryException(ClientRepositoryException::exceptionClientExist);
         }
     }
-    for(const auto& c : archiveClients->allClients)
+    for(const auto& c : archiveClients->getAllClients())
     {
         if(client->getPersonalID() == c->getPersonalID())
         {
@@ -40,11 +39,11 @@ void ClientManager::removeClient(const ClientPtr &client)
 
 int ClientManager::getNumberOfCurrentClients() const
 {
-    return currentClients -> allClients.size();
+    return currentClients -> getAllClients().size();
 }
 
 int ClientManager::getNumberOfArchClients() const
 {
-    return archiveClients -> allClients.size();
+    return archiveClients -> getAllClients().size();
 }
 

@@ -79,14 +79,9 @@ const float& Rent::getPrice() const
     return totalPrice;
 }
 
-string Rent::getClient() const
+const ClientPtr& Rent::getClient() const
 {
-    return client->getPersonalID();
-}
-
-string Rent::getVehicleRented() const
-{
-    return vehicle->getRegistrationNumber();
+    return client;
 }
 
 const local_date_time& Rent::getRentDate() const
@@ -112,4 +107,9 @@ int Rent::getTotalPrice() const
 const uuid& Rent::getID() const
 {
     return ID;
+}
+
+const string& Rent::getRegistrationNumber() const
+{
+    return vehicle -> getRegistrationNumber();
 }

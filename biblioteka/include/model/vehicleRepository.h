@@ -14,12 +14,12 @@ class VehicleRepository
 {
 private:
     list<VehiclePtr> vehicleRepository{};
-    friend class VehicleManager;
 public:
     void addVehicle(const VehiclePtr&);
     void removeVehicle(const VehiclePtr&);
     string getVehicle(const unsigned int& index) const;
     string vehicleRaport() const;
+    const list<VehiclePtr>& getVehicleRepository() const;
 };
 
 #endif

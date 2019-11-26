@@ -14,12 +14,11 @@ class RentsRepository
 {
 private:
     list<RentPtr> rentRepositoryList{};
-    friend class RentsManager;
 public:
     void createRent(const RentPtr&);
     void removeRent(const RentPtr&);
     string rentReport() const;
-    int getNumberOfRents() const;
+    const list<RentPtr>& getRentRepository() const;
 };
 
 #endif

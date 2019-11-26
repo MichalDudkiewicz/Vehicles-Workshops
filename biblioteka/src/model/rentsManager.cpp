@@ -17,19 +17,19 @@ RentsManager::RentsManager()
 
 void RentsManager::rentVehicle(const RentPtr &r)
 {
-    bool found = (find(currentRents -> rentRepositoryList.begin(), currentRents -> rentRepositoryList.end(), r) != currentRents -> rentRepositoryList.end());
+    bool found = (find(currentRents -> getRentRepository().begin(), currentRents -> getRentRepository().end(), r) != currentRents -> getRentRepository().end());
     if (found) throw RentsRepositoryException(RentsRepositoryException::exceptionVehicleRented);
-    for(const auto& rent : currentRents->rentRepositoryList)
+    for(const auto& rent : currentRents->getRentRepository())
     {
-        if(r->vehicle->getRegistrationNumber() == rent->vehicle->getRegistrationNumber())
+        if(r->getRegistrationNumber() == rent->getRegistrationNumber())
         {
             throw RentsRepositoryException(RentsRepositoryException::exceptionVehicleRented);
         }
     }
-    if(r -> client -> getNumberOfRents() < r -> client -> getVehicleLimit())
+    if(r -> getClient() -> getNumberOfRents() < r -> getClient() -> getVehicleLimit())
     {
         currentRents -> createRent(r);
-        r -> client -> addCurrentRent(r);
+        r -> getClient() -> addCurrentRent(r);
     }
     else
     {
@@ -39,21 +39,21 @@ void RentsManager::rentVehicle(const RentPtr &r)
 
 void RentsManager::returnVehicle(const RentPtr &r)
 {
-    r -> client -> removeArchiveRent(r);
+    r -> getClient() -> removeArchiveRent(r);
     r -> endRent();
     currentRents -> removeRent(r);
     archiveRents -> createRent(r);
-    changeClientType(r -> client);
+    changeClientType(r -> getClient());
 }
 
 string RentsManager::getClientForRentedVehicle(const VehiclePtr &v) const
 {
     string clientInfo;
-    for(const auto& rent : currentRents->rentRepositoryList)
+    for(const auto& rent : currentRents->getRentRepository())
     {
-        if(rent->vehicle == v)
+        if(rent->getRegistrationNumber() == v -> getRegistrationNumber())
         {
-            clientInfo = rent->client->clientInfo();
+            clientInfo = rent -> getClient() -> clientInfo();
             break;
         }
     }
@@ -62,12 +62,12 @@ string RentsManager::getClientForRentedVehicle(const VehiclePtr &v) const
 
 int RentsManager::getNumberOfCurrentRents() const
 {
-    return currentRents -> rentRepositoryList.size();
+    return currentRents -> getRentRepository().size();
 }
 
 int RentsManager::getNumberOfArchRents() const
 {
-    return archiveRents -> rentRepositoryList.size();
+    return archiveRents -> getRentRepository().size();
 }
 
 void RentsManager::changeClientType(const ClientPtr &client)

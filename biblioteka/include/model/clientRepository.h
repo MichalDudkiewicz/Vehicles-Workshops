@@ -9,7 +9,6 @@ using namespace std;
 class Client;
 class Rent;
 class ClientType;
-class ClientManager;
 typedef shared_ptr<Client> ClientPtr;
 typedef shared_ptr<Rent> RentPtr;
 typedef shared_ptr<ClientType> ClientTypePtr;
@@ -18,7 +17,6 @@ class ClientRepository
 {
 private:
     list<ClientPtr> allClients{};
-    friend class ClientManager;
 public:
     void addClient(const ClientPtr&);
     void removeClient(const ClientPtr&);
@@ -26,6 +24,7 @@ public:
     void changeType(const ClientPtr&, const ClientTypePtr&);
     string clientRepositoryInfo() const;
     unsigned int getNumberOfClients() const;
+    const list<ClientPtr>& getAllClients() const;
 };
 
 #endif

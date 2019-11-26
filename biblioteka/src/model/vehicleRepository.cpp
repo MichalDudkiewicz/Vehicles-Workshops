@@ -55,3 +55,7 @@ string VehicleRepository::vehicleRaport() const
     return chain.str();
 }
 
+const list<VehiclePtr>& VehicleRepository::getVehicleRepository() const
+{
+    return vehicleRepository;
+}

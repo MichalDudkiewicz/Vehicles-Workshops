@@ -55,9 +55,9 @@ string ClientRepository::clientRepositoryInfo() const
     for (const auto& client : allClients)
     {
         chain << i << ". " << client->getFullName();
-        if (client->clientType != nullptr)
+        if (client->getClientType() != nullptr)
         {
-            chain << " [" << client->clientType->getType() << "]" << endl;
+            chain << " [" << client->getClientType()->getType() << "]" << endl;
         }
         else
         {
@@ -71,4 +71,9 @@ string ClientRepository::clientRepositoryInfo() const
 unsigned int ClientRepository::getNumberOfClients() const
 {
     return allClients.size();
+}
+
+const list<ClientPtr>& ClientRepository::getAllClients() const
+{
+    return allClients;
 }

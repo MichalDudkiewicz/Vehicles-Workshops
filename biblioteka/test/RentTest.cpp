@@ -3,8 +3,6 @@
 #include "model/client.h"
 #include "model/vehicle.h"
 #include "model/clientGold.h"
-#include "model/clientBronze.h"
-#include "model/clientSilver.h"
 
 
 BOOST_AUTO_TEST_SUITE(TestSuiteCorrect)
@@ -49,7 +47,7 @@ BOOST_AUTO_TEST_CASE(RentClientCase)
     ClientPtr client = make_shared<Client>("Michal", "Dudkiewicz", "123", "Woronicza", 7, "Cicha", 33);
     VehiclePtr pojazd = make_shared<Vehicle>(1010.2, "A11112");
     Rent wypozyczenie(client, pojazd);
-    BOOST_REQUIRE_EQUAL(wypozyczenie.getClient(), "123");
+    BOOST_REQUIRE_EQUAL(wypozyczenie.getClient(), client);
 }
 
 BOOST_AUTO_TEST_CASE(RentEndClientCase)
@@ -58,7 +56,7 @@ BOOST_AUTO_TEST_CASE(RentEndClientCase)
     VehiclePtr pojazd = make_shared<Vehicle>(1010.2, "A11112");
     Rent wypozyczenie(client, pojazd);
     wypozyczenie.endRent();
-    BOOST_REQUIRE_EQUAL(wypozyczenie.getClient(), "123");
+    BOOST_REQUIRE_EQUAL(wypozyczenie.getClient(), client);
 }
 
 BOOST_AUTO_TEST_CASE(RentTotalPriceCase)
