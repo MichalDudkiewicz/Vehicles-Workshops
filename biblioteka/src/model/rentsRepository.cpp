@@ -1,16 +1,14 @@
 #include "model/rentsRepository.h"
-#include <sstream>
 #include "model/rent.h"
 #include "model/rentsRepositoryException.h"
 #include <algorithm>
-#include <boost/uuid/uuid.hpp>
 
-void RentsRepository::createRent(const RentPtr &r)
+void RentsRepository::create(const RentPtr &r)
 {
     if (r == nullptr) throw RentsRepositoryException(RentsRepositoryException::exceptionRentNullPtr);
     for(const auto &rent : rentRepositoryList)
     {
-        if(r -> getID() == rent -> getID())
+        if(*rent == *r)
         {
             throw RentsRepositoryException(RentsRepositoryException::exceptionRentExist);
         }
@@ -18,15 +16,15 @@ void RentsRepository::createRent(const RentPtr &r)
     rentRepositoryList.push_back(r);
 }
 
-void RentsRepository::removeRent(const RentPtr &r)
+void RentsRepository::remove(const RentPtr &rent)
 {
-    if (r == nullptr) throw RentsRepositoryException(RentsRepositoryException::exceptionRentNullPtr);
-    bool found = (find(rentRepositoryList.begin(), rentRepositoryList.end(), r) != rentRepositoryList.end());
-    if (!found) throw RentsRepositoryException(RentsRepositoryException::exceptionRentNotExist);
-    rentRepositoryList.remove(r);
+    if (rent == nullptr) throw RentsRepositoryException(RentsRepositoryException::exceptionRentNullPtr);
+    if (find_if(rentRepositoryList.begin(), rentRepositoryList.end(), FindByID((*rent).getID())) == rentRepositoryList.end())
+        throw RentsRepositoryException(RentsRepositoryException::exceptionRentNotExist);
+    rentRepositoryList.remove(rent);
 }
 
-string RentsRepository::rentReport() const
+string RentsRepository::getAll() const
 {
     ostringstream chain;
     for(const auto& rent : rentRepositoryList)
@@ -36,10 +34,25 @@ string RentsRepository::rentReport() const
     return chain.str();
 }
 
-const list<RentPtr>& RentsRepository::getRentRepository() const
+const list<RentPtr>& RentsRepository::getRepository() const
 {
     return rentRepositoryList;
 }
 
+const RentPtr& RentsRepository::search(const unsigned int& index) const
+{
+    if (index > rentRepositoryList.size()) throw RentsRepositoryException(RentsRepositoryException::exceptionRentNotExist);
+    unsigned int i = 1;
+    string chain;
+    for(const auto& c : rentRepositoryList)
+    {
+        if(i == index)
+        {
+            return c;
+        }
+        i ++;
+    }
+    throw RentsRepositoryException(RentsRepositoryException::exceptionRentNotExist);
+}
 
 

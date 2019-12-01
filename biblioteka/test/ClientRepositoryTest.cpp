@@ -17,8 +17,8 @@ BOOST_AUTO_TEST_SUITE(TestSuiteCorrect)
         output_test_stream output2;
         ClientPtr klient = make_shared<Client>("Michal", "Dudkiewicz", "1234", "a", 2, "b", 3);
         ClientRepository repo;
-        repo.addClient(klient);
-        output << repo.clientRepositoryInfo();
+        repo.create(klient);
+        output << repo.getAll();
         output2 <<"1. Michal Dudkiewicz" <<endl;
         BOOST_TEST( output.is_equal(output2.str()));
     }
@@ -29,11 +29,11 @@ BOOST_AUTO_TEST_SUITE(TestSuiteCorrect)
         output_test_stream output2;
         ClientPtr klient = make_shared<Client>("Michal", "Dudkiewicz", "1234", "a", 2, "b", 3);
         ClientRepository repo;
-        repo.addClient(klient);
+        repo.create(klient);
         ClientPtr klient2 = make_shared<Client>("Jacek", "Dudkiewicz", "12324", "a", 2, "b", 3);
-        repo.addClient(klient2);
-        repo.removeClient(1);
-        output << repo.clientRepositoryInfo();
+        repo.create(klient2);
+        repo.remove(1);
+        output << repo.getAll();
         output2 <<"1. Jacek Dudkiewicz" <<endl;
         BOOST_TEST( output.is_equal(output2.str()));
     }
@@ -44,11 +44,11 @@ BOOST_AUTO_TEST_SUITE(TestSuiteCorrect)
         output_test_stream output2;
         ClientPtr klient = make_shared<Client>("Michal", "Dudkiewicz", "1234", "a", 2, "b", 3);
         ClientRepository repo;
-        repo.addClient(klient);
+        repo.create(klient);
         ClientPtr klient2 = make_shared<Client>("Jacek", "Dudkiewicz", "12834", "a", 2, "b", 3);
-        repo.addClient(klient2);
-        repo.removeClient(klient);
-        output << repo.clientRepositoryInfo();
+        repo.create(klient2);
+        repo.remove(klient);
+        output << repo.getAll();
         output2 <<"1. Jacek Dudkiewicz" <<endl;
         BOOST_TEST( output.is_equal(output2.str()));
     }
@@ -59,10 +59,10 @@ BOOST_AUTO_TEST_SUITE(TestSuiteCorrect)
         output_test_stream output2;
         ClientPtr klient = make_shared<Client>("Michal", "Dudkiewicz", "1234", "a", 2, "b", 3);
         ClientRepository repo;
-        repo.addClient(klient);
+        repo.create(klient);
         ClientTypePtr type(new ClientGold);
         repo.changeType(klient, type);
-        output << repo.clientRepositoryInfo();
+        output << repo.getAll();
         output2 <<"1. Michal Dudkiewicz [GOLD]" <<endl;
         BOOST_TEST( output.is_equal(output2.str()));
     }

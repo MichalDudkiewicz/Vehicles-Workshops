@@ -33,8 +33,8 @@ BOOST_AUTO_TEST_CASE(ClientSameIDExceptionCase)
     ClientPtr client = make_shared<Client>("Michal", "Dudkiewicz", "123", "Woronicza", 7, "Cicha", 33);
     ClientPtr client2 = make_shared<Client>("Mich2al", "Dudks", "123", "Woronicza", 7, "Cicha", 33);
     ClientRepository r;
-    r.addClient(client);
-    BOOST_REQUIRE_THROW(r.addClient(client2), logic_error);
+    r.create(client);
+    BOOST_REQUIRE_THROW(r.create(client2), logic_error);
 }
 
 BOOST_AUTO_TEST_CASE(VehicleSameRegExceptionCase)
@@ -88,9 +88,9 @@ BOOST_AUTO_TEST_CASE(ClientDifferentIDCase)
     ClientRepository repozytorium;
     for(const auto& client : tablica)
     {
-        repozytorium.addClient(client);
+        repozytorium.create(client);
     }
-    BOOST_REQUIRE_EQUAL(repozytorium.getNumberOfClients(), 10);
+    BOOST_REQUIRE_EQUAL(repozytorium.getRepository().size(), 10);
 }
 
 

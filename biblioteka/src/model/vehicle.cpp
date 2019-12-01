@@ -23,3 +23,16 @@ const string& Vehicle::getRegistrationNumber() const
 {
     return registrationNumber;
 }
+
+bool Vehicle::operator== (const Vehicle &v) const
+{
+    return v.registrationNumber == registrationNumber;
+}
+
+FindByRegistration::FindByRegistration(const string &n) : registrationNumber(n)
+{}
+
+bool FindByRegistration::operator()(const VehiclePtr &v) const
+{
+    return (*v).getRegistrationNumber() == registrationNumber;
+}

@@ -16,21 +16,21 @@ int main() {
     cout << (*klient).getDiscount();
     cout << (*klient).getVehicleLimit();
     ClientRepository repo;
-    repo.addClient(klient);
+    repo.create(klient);
     cout << endl;
     ClientPtr klient2 = make_shared<Client>("Jacek", "Dudkiewicz", "12334", "a", 2, "b", 3);
     ClientPtr klient3 = make_shared<Client>("Andrzej", "Dudkiewicz", "12w34", "a", 2, "b", 3);
     ClientPtr klient4 = make_shared<Client>("Anna", "Dudkiewicz", "12134", "a", 2, "b", 3);
-    repo.addClient(klient2);
-    repo.addClient(klient3);
-    repo.addClient(klient4);
-    cout << repo.clientRepositoryInfo()<<endl;
+    repo.create(klient2);
+    repo.create(klient3);
+    repo.create(klient4);
+    cout << repo.getAll() << endl;
     repo.changeType(klient2, typeOfClient);
-    cout << repo.clientRepositoryInfo()<<endl;
-    repo.removeClient(klient3);
-    cout << repo.clientRepositoryInfo()<<endl;
-    repo.removeClient(1);
-    cout << repo.clientRepositoryInfo()<<endl;
+    cout << repo.getAll() << endl;
+    repo.remove(klient3);
+    cout << repo.getAll() << endl;
+    repo.remove(1);
+    cout << repo.getAll() << endl;
     return 0;
 }
 

@@ -38,6 +38,16 @@ public:
     const local_date_time& getEndDate() const;
     const uuid& getID() const;
     const string& getRegistrationNumber() const;
+    bool operator== (const Rent&) const;
+};
+
+typedef shared_ptr<Rent> RentPtr;
+
+struct FindByID
+{
+    uuid ID;
+    explicit FindByID(const uuid&);
+    bool operator()(const RentPtr&) const;
 };
 
 #endif

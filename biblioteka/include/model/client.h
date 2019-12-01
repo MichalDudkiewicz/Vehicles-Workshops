@@ -49,6 +49,16 @@ public:
     int getNumberOfArchRents() const;
     const vector<RentPtr>& getAllClientRents() const;
     const ClientTypePtr& getClientType() const;
+    bool operator== (const Client&) const;
+};
+
+typedef shared_ptr<Client> ClientPtr;
+
+struct FindByPersonalID
+{
+    string personalID;
+    explicit FindByPersonalID(const string&);
+    bool operator()(const ClientPtr&) const;
 };
 
 #endif

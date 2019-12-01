@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_CASE(VehicleRepositoryGetVehicleCase)
                 chain << tablica[i]->vehicleInfo();
             }
         }
-        BOOST_REQUIRE_EQUAL(repozytorium.search(4), chain.str());
+        BOOST_REQUIRE_EQUAL(repozytorium.search(4), tablica[3]);
     }
 
 

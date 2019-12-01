@@ -102,3 +102,16 @@ const string& Rent::getRegistrationNumber() const
 {
     return vehicle -> getRegistrationNumber();
 }
+
+bool Rent::operator== (const Rent &r) const
+{
+    return r.ID == ID;
+}
+
+FindByID::FindByID(const uuid &id) : ID(id)
+{}
+
+bool FindByID::operator()(const RentPtr &r) const
+{
+    return (*r).getID() == ID;
+}

@@ -17,9 +17,10 @@ RentsManager::RentsManager()
 
 void RentsManager::rentVehicle(const RentPtr &r)
 {
-    bool found = (find(currentRents -> getRentRepository().begin(), currentRents -> getRentRepository().end(), r) != currentRents -> getRentRepository().end());
+    bool found = (find(currentRents->getRepository().begin(), currentRents->getRepository().end(), r) !=
+                  currentRents->getRepository().end());
     if (found) throw RentsRepositoryException(RentsRepositoryException::exceptionVehicleRented);
-    for(const auto& rent : currentRents->getRentRepository())
+    for(const auto& rent : currentRents->getRepository())
     {
         if(r->getRegistrationNumber() == rent->getRegistrationNumber())
         {
@@ -28,7 +29,7 @@ void RentsManager::rentVehicle(const RentPtr &r)
     }
     if(r -> getClient() -> getNumberOfRents() < r -> getClient() -> getVehicleLimit())
     {
-        currentRents -> createRent(r);
+        currentRents->create(r);
         r -> getClient() -> addCurrentRent(r);
     }
     else
@@ -41,15 +42,15 @@ void RentsManager::returnVehicle(const RentPtr &r)
 {
     r -> endRent();
     r -> getClient() -> removeArchiveRent(r);
-    currentRents -> removeRent(r);
-    archiveRents -> createRent(r);
+    currentRents->remove(r);
+    archiveRents->create(r);
     changeClientType(r -> getClient());
 }
 
 string RentsManager::getClientForRentedVehicle(const VehiclePtr &v) const
 {
     string clientInfo;
-    for(const auto& rent : currentRents->getRentRepository())
+    for(const auto& rent : currentRents->getRepository())
     {
         if(rent->getRegistrationNumber() == v -> getRegistrationNumber())
         {
@@ -62,12 +63,12 @@ string RentsManager::getClientForRentedVehicle(const VehiclePtr &v) const
 
 int RentsManager::getNumberOfCurrentRents() const
 {
-    return currentRents -> getRentRepository().size();
+    return currentRents->getRepository().size();
 }
 
 int RentsManager::getNumberOfArchRents() const
 {
-    return archiveRents -> getRentRepository().size();
+    return archiveRents->getRepository().size();
 }
 
 void RentsManager::changeClientType(const ClientPtr &client)

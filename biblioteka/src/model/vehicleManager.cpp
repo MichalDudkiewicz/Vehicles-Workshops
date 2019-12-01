@@ -11,16 +11,16 @@ VehicleManager::VehicleManager()
 
 void VehicleManager::addVehicle(const VehiclePtr &vehicle)
 {
-    for(const auto& v : currentVehicles->getVehicleRepository())
+    for(const auto& v : currentVehicles->getRepository())
     {
-        if(vehicle -> getRegistrationNumber() == v->getRegistrationNumber())
+        if(*vehicle == *v)
         {
             throw VehicleRepositoryException(VehicleRepositoryException::exceptionVehicleExists);
         }
     }
-    for(const auto& v : archiveVehicles->getVehicleRepository())
+    for(const auto& v : archiveVehicles->getRepository())
     {
-        if(vehicle->getRegistrationNumber() == v->getRegistrationNumber())
+        if(*vehicle == *v)
         {
             archiveVehicles->remove(vehicle);
             break;
@@ -37,11 +37,11 @@ void VehicleManager::removeVehicle(const VehiclePtr &vehicle)
 
 int VehicleManager::getNumberOfCurrentVehicles() const
 {
-    return currentVehicles -> getVehicleRepository().size();
+    return currentVehicles->getRepository().size();
 }
 
 int VehicleManager::getNumberOfArchVehicles() const
 {
-    return archiveVehicles -> getVehicleRepository().size();
+    return archiveVehicles->getRepository().size();
 }
 

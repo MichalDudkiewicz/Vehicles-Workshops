@@ -166,3 +166,16 @@ const ClientTypePtr& Client::getClientType() const
 {
     return clientType;
 }
+
+bool Client::operator== (const Client &c) const
+{
+    return c.personalID == personalID;
+}
+
+FindByPersonalID::FindByPersonalID(const string &id) : personalID(id)
+{}
+
+bool FindByPersonalID::operator()(const ClientPtr &c) const
+{
+    return (*c).getPersonalID() == personalID;
+}

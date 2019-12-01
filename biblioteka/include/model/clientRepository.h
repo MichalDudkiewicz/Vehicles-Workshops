@@ -3,7 +3,7 @@
 #include <list>
 #include <string>
 #include <memory>
-//#include "model/repository.h"
+#include "model/repository.h"
 
 using namespace std;
 class Client;
@@ -13,18 +13,18 @@ typedef shared_ptr<Client> ClientPtr;
 typedef shared_ptr<Rent> RentPtr;
 typedef shared_ptr<ClientType> ClientTypePtr;
 
-class ClientRepository
+class ClientRepository : public Repository<Client>
 {
 private:
     list<ClientPtr> allClients{};
 public:
-    void addClient(const ClientPtr&);
-    void removeClient(const ClientPtr&);
-    void removeClient(const unsigned int&);
+    void create(const ClientPtr&) override;
+    void remove(const ClientPtr&) override;
+    void remove(const unsigned int&);
     void changeType(const ClientPtr&, const ClientTypePtr&);
-    string clientRepositoryInfo() const;
-    unsigned int getNumberOfClients() const;
-    const list<ClientPtr>& getAllClients() const;
+    string getAll() const override;
+    const ClientPtr& search(const unsigned int&) const override;
+    const list<ClientPtr>& getRepository() const override;
 };
 
 #endif
